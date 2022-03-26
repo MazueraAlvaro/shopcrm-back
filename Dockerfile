@@ -4,7 +4,7 @@ WORKDIR /usr/src/app
 
 COPY package*.json ./
 
-RUN npm install -g glob rimraf
+RUN npm install -g glob rimraf @nestjs/cli
 
 RUN npm install --only=development
 
