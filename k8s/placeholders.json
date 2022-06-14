@@ -1,0 +1,12 @@
+{
+  "environments": [
+    {
+      "name": "develop",
+      "branch": "develop",
+      "placeholders": {
+        "POD_PORT": 3000,
+        "NODE_PORT": 33500
+      }
+    }
+  ]
+}
