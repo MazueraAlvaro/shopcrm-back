@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: shopcrm-back-deployment
+  labels:
+    app: shopcrm-back
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: shopcrm-back
+  template:
+    metadata:
+      labels:
+        app: shopcrm-back
+    spec:
+      containers:
+        - name: shopcrm-back
+          image: 'IMAGE'
+          ports:
+            - containerPort: 'POD_PORT'
