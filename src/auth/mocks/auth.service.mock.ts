@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { hashSync } from 'bcrypt';
+import { Types } from 'mongoose';
 import { UsersService } from '../../users/users.service';
 
 export const userMock = {
-  _id: 76987689769,
+  _id: new Types.ObjectId(),
   email: 'alvaro@edlegion.com',
   password: hashSync('123456', 10),
   name: 'Alvaro Mazuera',
