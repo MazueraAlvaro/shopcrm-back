@@ -5,7 +5,26 @@
       "branch": "develop",
       "placeholders": {
         "POD_PORT": 3000,
-        "NODE_PORT": 31500
+        "NODE_PORT": 31500,
+        "ENVIRONMENT": "develop"
+      }
+    },
+    {
+      "name": "main",
+      "branch": "main",
+      "placeholders": {
+        "POD_PORT": 3000,
+        "NODE_PORT": 31500,
+        "ENVIRONMENT": "prod"
+      }
+    },
+    {
+      "name": "staging",
+      "branch": "staging",
+      "placeholders": {
+        "POD_PORT": 3000,
+        "NODE_PORT": 31500,
+        "ENVIRONMENT": "staging"
       }
     }
   ]
