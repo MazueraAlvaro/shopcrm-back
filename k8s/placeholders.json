@@ -14,7 +14,7 @@
       "branch": "main",
       "placeholders": {
         "POD_PORT": 3000,
-        "NODE_PORT": 31500,
+        "NODE_PORT": 31501,
         "ENVIRONMENT": "prod"
       }
     },
@@ -23,7 +23,7 @@
       "branch": "staging",
       "placeholders": {
         "POD_PORT": 3000,
-        "NODE_PORT": 31500,
+        "NODE_PORT": 31502,
         "ENVIRONMENT": "staging"
       }
     }
