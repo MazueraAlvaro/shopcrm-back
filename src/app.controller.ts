@@ -1,12 +1,14 @@
-import { Controller, Get } from '@nestjs/common';
-import { ConfigService } from '@nestjs/config';
+import { Controller, Get, Post, Request, UseGuards } from '@nestjs/common';
 import { AppService } from './app.service';
+import { AuthService } from './auth/auth.service';
+import { JwtAuthGuard } from './auth/guards/jwt-auth.guard';
+import { LocalAuthGuard } from './auth/guards/local-auth.guard';
 
 @Controller()
 export class AppController {
   constructor(
     private readonly appService: AppService,
-    private readonly configService: ConfigService,
+    private authService: AuthService,
   ) {}
 
   @Get()
@@ -14,8 +16,15 @@ export class AppController {
     return this.appService.getHello();
   }
 
-  @Get('/config')
-  getConfig(): number {
-    return this.configService.get<number>('PORT');
+  @UseGuards(LocalAuthGuard)
+  @Post('auth/login')
+  async login(@Request() req) {
+    return this.authService.login(req.user);
+  }
+
+  @UseGuards(JwtAuthGuard)
+  @Get('profile')
+  getProfile(@Request() req) {
+    return req.user;
   }
 }

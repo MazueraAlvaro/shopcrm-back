@@ -1,6 +1,4 @@
 import { Controller, Get } from '@nestjs/common';
-// import { CatsService } from './cats.service';
-// import { CreateCatDto } from './dto/create-cat.dto';
 import { User } from './schemas/user.schema';
 import { UsersService } from './users.service';
 
@@ -11,5 +9,10 @@ export class UsersController {
   @Get()
   async findAll(): Promise<User[]> {
     return this.usersService.findAll();
+  }
+
+  @Get()
+  async findOne(email: string): Promise<User> {
+    return this.usersService.findOne(email);
   }
 }
