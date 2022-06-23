@@ -1,18 +1,20 @@
 import { Test, TestingModule } from '@nestjs/testing';
+import { AuthController } from '../auth.controller';
 import { AuthService } from '../auth.service';
 import { AuthServiceMock } from './mocks/auth.controller.mock';
 import {
   JWTModuleMock,
-  userMock,
   UsersModuleMock,
+  userMock,
 } from './mocks/auth.service.mock';
 
 describe('AuthService', () => {
-  let authService: AuthService;
+  let authController: AuthController;
 
   beforeEach(async () => {
     const module: TestingModule = await Test.createTestingModule({
       imports: [UsersModuleMock, JWTModuleMock],
+      controllers: [AuthController],
       providers: [
         {
           provide: AuthService,
@@ -21,34 +23,21 @@ describe('AuthService', () => {
       ],
     }).compile();
 
-    authService = module.get<AuthService>(AuthService);
+    authController = module.get<AuthController>(AuthController);
   });
 
   it('should be defined', () => {
-    expect(authService).toBeDefined();
+    expect(authController).toBeDefined();
   });
 
-  it('should return the payload found user', async () => {
-    expect(await authService.validateUser(userMock.email, '123456')).toEqual({
-      email: userMock.email,
-      _id: userMock._id,
-    });
+  it('should return JWT on login', async () => {
+    const req = { user: { email: userMock.email, _id: userMock._id } };
+    expect(await authController.login(req)).toHaveProperty('access_token');
   });
 
-  it('should return the null for user not found (non-temporal)', async () => {
-    expect(await authService.validateUser('a@a.com', '123456')).toBeNull();
-  });
-
-  it('should return the payload found user (temporal)', async () => {
-    expect(await authService.validateUser('a@temporal.com', '123456')).toEqual({
-      email: 'a@temporal.com',
-      _id: userMock._id,
-    });
-  });
-
-  it('should return the JWT', async () => {
-    expect(
-      await authService.login({ email: userMock.email, _id: userMock._id }),
-    ).toHaveProperty('access_token');
+  it('should return the user on getProfile', async () => {
+    const user = { email: userMock.email, _id: userMock._id };
+    const req = { user };
+    expect(await authController.getProfile(req)).toEqual(user);
   });
 });

@@ -2,7 +2,7 @@ import { Module } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
 import { hashSync } from 'bcrypt';
 import { Types } from 'mongoose';
-import { UsersService } from '../../users/users.service';
+import { UsersService } from '../../../users/users.service';
 
 export const userMock = {
   _id: new Types.ObjectId(),
