@@ -54,7 +54,7 @@ pipeline {
                 }
             }
             steps {
-                sh 'npm test'
+                sh 'npm run test:cov'
             }
         }
         stage('Image Build') {
